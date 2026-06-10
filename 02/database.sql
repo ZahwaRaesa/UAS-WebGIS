@@ -1,0 +1,29 @@
+CREATE DATABASE IF NOT EXISTS 02_kerusakan;
+USE 02_kerusakan;
+
+CREATE TABLE jalan(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_jalan VARCHAR(150),
+ status VARCHAR(50),
+ panjang DOUBLE,
+ geom LINESTRING NOT NULL,
+ SPATIAL INDEX idx_jalan(geom)
+);
+
+CREATE TABLE parsil(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ pemilik VARCHAR(100),
+ status VARCHAR(50),
+ luas DOUBLE,
+ geom POLYGON NOT NULL,
+ SPATIAL INDEX idx_parsil(geom)
+);
+
+CREATE TABLE jalan_rusak(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_titik VARCHAR(100),
+ keterangan TEXT,
+ geom POINT NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ SPATIAL INDEX idx_rusak(geom)
+);
