@@ -1,10 +1,17 @@
+CREATE DATABASE IF NOT EXISTS `uas_06` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `uas_06`;
+
+-- ============================================================
+-- Bawaan 05
+-- ============================================================
+
 -- ============================================================
 --  WebGIS Pengentasan Kemiskinan  |  Database: uas_06
 --  Jalankan sekali untuk setup awal
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS uas_06 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE uas_06;
+
+
 
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS log_aktivitas;
@@ -283,3 +290,145 @@ GROUP BY ri.id;
 
 -- ── SELESAI ──────────────────────────────────────────────────
 SELECT 'Database uas_06 berhasil dibuat!' AS status;
+
+
+-- ============================================================
+-- Bawaan 02
+-- ============================================================
+
+
+
+
+CREATE TABLE jalan(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_jalan VARCHAR(150),
+ status VARCHAR(50),
+ panjang DOUBLE,
+ geom LINESTRING NOT NULL,
+ SPATIAL INDEX idx_jalan(geom)
+);
+
+CREATE TABLE parsil(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ pemilik VARCHAR(100),
+ status VARCHAR(50),
+ luas DOUBLE,
+ geom POLYGON NOT NULL,
+ SPATIAL INDEX idx_parsil(geom)
+);
+
+CREATE TABLE jalan_rusak(
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ nama_titik VARCHAR(100),
+ keterangan TEXT,
+ geom POINT NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ SPATIAL INDEX idx_rusak(geom)
+);
+
+
+-- ============================================================
+-- Bawaan 01
+-- ============================================================
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 07 Jun 2026 pada 10.53
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
+
+
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `db_spbu`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `spbu`
+--
+
+CREATE TABLE `spbu_01` (
+  `id` int(11) NOT NULL,
+  `nama_spbu` varchar(255) DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  `lng` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `spbu`
+--
+
+INSERT INTO `spbu_01` (`id`, `nama_spbu`, `lat`, `lng`) VALUES
+(1, 'spbu kobar', -0.02197187355969219, 109.31207858442205),
+(3, 'spbu paris', 0.007368924759898348, 109.37010012983221),
+(4, 'spbu tanray', 0.016651739943910275, 109.29988329640928);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `spbu`
+--
+ALTER TABLE `spbu_01`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `spbu`
+--
+ALTER TABLE `spbu_01`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- ============================================================
+-- Bawaan 04
+-- ============================================================
+
+-- =============================================
+-- DATABASE: db_24jam
+-- =============================================
+
+
+
+
+
+-- ---------------------------------------------
+-- Tabel: spbu
+-- ---------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `spbu_04` (
+  `id`        INT(11)      NOT NULL AUTO_INCREMENT,
+  `nama_spbu` VARCHAR(100) NOT NULL,
+  `no_wa`     VARCHAR(20)  NOT NULL,
+  `status`    ENUM('yes','no') NOT NULL DEFAULT 'no',
+  `latitude`  DOUBLE       NOT NULL,
+  `longitude` DOUBLE       NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
