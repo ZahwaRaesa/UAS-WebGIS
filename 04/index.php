@@ -266,7 +266,7 @@ lng:pos.lng
 })
 .then(r=>r.text())
 .then(res=>{
-if(res=="success"){
+if(res.trim()=="success"){
 alert("Lokasi berhasil diupdate");
 location.reload();
 }
@@ -348,7 +348,7 @@ body:fd
 })
 .then(r=>r.text())
 .then(res=>{
-if(res=="success"){
+if(res.trim()=="success"){
 alert("Data berhasil disimpan");
 location.reload();
 }else{
@@ -422,7 +422,7 @@ lng:lng
 })
 .then(r=>r.text())
 .then(res=>{
-if(res=="success"){
+if(res.trim()=="success"){
 alert("Data berhasil diupdate");
 location.reload();
 }else{
@@ -452,7 +452,7 @@ id:id
 })
 .then(r=>r.text())
 .then(res=>{
-if(res=="success"){
+if(res.trim()=="success"){
 alert("Data berhasil dihapus");
 location.reload();
 }

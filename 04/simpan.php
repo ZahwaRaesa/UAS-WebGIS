@@ -15,6 +15,5 @@ $query = "INSERT INTO spbu (nama_spbu, no_wa, status, latitude, longitude)
 if ($conn->query($query)) {
     echo "success";
 } else {
-    echo "error";
+    echo "error: " . $conn->error;
 }
-?>

@@ -40,11 +40,11 @@ function importSql($conn, $file) {
 
 // Cek apakah tabel uas_06 sudah ada (menggunakan tabel role sebagai patokan)
 $res = $conn->query("SHOW TABLES LIKE 'role'");
-if ($res->num_rows == 0) {
+if ($res && $res->num_rows == 0) {
     echo "Tabel utama (05) belum ada, menjalankan import...\n";
     importSql($conn, __DIR__ . '/05/database_uas_06.sql');
 } else {
-    echo "Tabel utama (05) sudah ada, skip import.\n";
+    echo "Tabel utama (05) sudah ada atau query gagal, skip import.\n";
 }
 
 // Cek tabel SPBU (04)
@@ -52,7 +52,7 @@ $db04 = getenv('DB_NAME_04') ?: $db;
 $conn->query("CREATE DATABASE IF NOT EXISTS `$db04` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 $conn->select_db($db04);
 $res = $conn->query("SHOW TABLES LIKE 'spbu'");
-if ($res->num_rows == 0) {
+if ($res && $res->num_rows == 0) {
     echo "Tabel spbu (04) belum ada, menjalankan import...\n";
     importSql($conn, __DIR__ . '/04/db_spbu.sql');
 } else {

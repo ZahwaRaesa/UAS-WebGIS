@@ -10,6 +10,5 @@ $query = "DELETE FROM spbu WHERE id='$id'";
 if ($conn->query($query)) {
     echo "success";
 } else {
-    echo "error";
+    echo "error: " . $conn->error;
 }
-?>
