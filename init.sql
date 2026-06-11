@@ -289,9 +289,6 @@ LEFT JOIN penduduk p ON p.rumah_ibadah_id=ri.id AND p.status_hidup='hidup'
 GROUP BY ri.id;
 
 -- ── SELESAI ──────────────────────────────────────────────────
-SELECT 'Database uas_06 berhasil dibuat!' AS status;
-
-
 -- ============================================================
 -- Bawaan 02
 -- ============================================================
