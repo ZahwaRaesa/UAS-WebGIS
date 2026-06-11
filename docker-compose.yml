@@ -13,9 +13,6 @@ services:
       # Nama-nama database (akan otomatis dibuat oleh MySQL container saat pertama kali jalan)
       - DB_NAME=uas_06
       - DB_NAME_04=db_24jam
-    depends_on:
-      db:
-        condition: service_healthy
     restart: always
 
   db:
