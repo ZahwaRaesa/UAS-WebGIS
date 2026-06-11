@@ -2,12 +2,14 @@
 $host = getenv('DB_HOST') ?: 'db';
 $user = getenv('DB_USER') ?: 'root';
 $pass = getenv('DB_PASSWORD') ?: 'rootpassword';
-$db   = getenv('DB_NAME') ?: 'db_spbu';
+$db   = 'db_spbu';
 
 $conn = @mysqli_connect($host, $user, $pass, $db);
 
 if (!$conn) {
-    die("Koneksi database gagal: " . mysqli_connect_error());
+    header('Content-Type: application/json');
+    echo json_encode(["error" => "Database gagal konek"]);
+    exit;
 }
 
 $koneksi = $conn;

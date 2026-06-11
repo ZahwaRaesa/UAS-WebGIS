@@ -3,10 +3,6 @@
 $host = getenv('DB_HOST') ?: 'db';
 $user = getenv('DB_USER') ?: 'root';
 $pass = getenv('DB_PASSWORD') ?: 'rootpassword';
-$db   = getenv('DB_NAME') ?: '02_kerusakan';
+$db   = '02_kerusakan';
 
 $conn = @mysqli_connect($host, $user, $pass, $db);
-
-if (!$conn) {
-    die("Koneksi database gagal: " . mysqli_connect_error());
-}
