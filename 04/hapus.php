@@ -5,7 +5,7 @@ ob_clean();
 
 $id = $conn->real_escape_string($_POST['id'] ?? '');
 
-$query = "DELETE FROM spbu WHERE id='$id'";
+$query = "DELETE FROM spbu_04 WHERE id='$id'";
 
 if ($conn->query($query)) {
     echo "success";

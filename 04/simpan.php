@@ -9,8 +9,8 @@ $status = $conn->real_escape_string($_POST['status'] ?? '');
 $lat    = $conn->real_escape_string($_POST['lat']    ?? '');
 $lng    = $conn->real_escape_string($_POST['lng']    ?? '');
 
-$query = "INSERT INTO spbu (nama_spbu, no_wa, status, latitude, longitude)
-          VALUES ('$nama','$wa','$status','$lat','$lng')";
+$query = "INSERT INTO spbu_04 (nama_spbu, no_wa, status, latitude, longitude)
+          VALUES ('$nama', '$wa', '$status', $lat, $lng)";
 
 if ($conn->query($query)) {
     echo "success";

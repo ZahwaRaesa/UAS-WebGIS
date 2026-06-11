@@ -10,9 +10,8 @@ services:
       - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=rootpassword
-      # Nama-nama database (akan otomatis dibuat oleh MySQL container saat pertama kali jalan)
+      # Nama database utama
       - DB_NAME=uas_06
-      - DB_NAME_04=db_24jam
     restart: always
 
   db:
@@ -23,11 +22,8 @@ services:
       - ":3306"
     volumes:
       - db_data:/var/lib/mysql
-      # Auto-import semua database saat container pertama kali dibuat (volume kosong)
-      - ./01/db_spbu.sql:/docker-entrypoint-initdb.d/1_db_spbu.sql
-      - ./02/database.sql:/docker-entrypoint-initdb.d/2_database.sql
-      - ./04/db_spbu.sql:/docker-entrypoint-initdb.d/4_db_spbu.sql
-      - ./05/database_uas_06.sql:/docker-entrypoint-initdb.d/5_database_uas_06.sql
+      # Auto-import database terpadu
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s

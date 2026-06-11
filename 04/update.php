@@ -10,7 +10,7 @@ $status = $conn->real_escape_string($_POST['status'] ?? '');
 $lat    = $conn->real_escape_string($_POST['lat']    ?? '');
 $lng    = $conn->real_escape_string($_POST['lng']    ?? '');
 
-$query = "UPDATE spbu SET 
+$query = "UPDATE spbu_04 SET 
     nama_spbu='$nama',
     no_wa='$wa',
     status='$status',

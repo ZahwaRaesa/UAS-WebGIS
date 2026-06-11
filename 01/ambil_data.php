@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 
-$result = $koneksi->query("SELECT * FROM spbu");
+$result = $koneksi->query("SELECT * FROM spbu_01");
 
 $data = [];
 while($row = $result->fetch_assoc()){

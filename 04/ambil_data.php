@@ -3,7 +3,7 @@ include 'koneksi.php';
 
 $data = [];
 
-$result = $conn->query("SELECT * FROM spbu");
+$result = $conn->query("SELECT * FROM spbu_04");
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
