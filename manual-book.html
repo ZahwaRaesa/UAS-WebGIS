@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Book WebGIS UAS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #16212d;
+      background: #f6f9fb;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0;
+    }
+
+    h1,
+    h2 {
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    h2 {
+      margin-top: 32px;
+      font-size: 1.35rem;
+    }
+
+    p {
+      color: #556575;
+    }
+
+    a {
+      color: #0e7f88;
+      font-weight: 700;
+    }
+
+    .panel {
+      margin-top: 22px;
+      padding: 22px;
+      border: 1px solid rgba(154, 170, 185, 0.36);
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 16px 34px rgba(42, 58, 74, 0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e9ee;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf4f7;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #edf4f7;
+      color: #243746;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="index.html">Kembali ke Portal WebGIS Terpadu</a>
+    <h1>Manual Book WebGIS UAS</h1>
+    <p>Dokumen ringkas ini menjelaskan struktur project, daftar aplikasi, dan konfigurasi environment database untuk deployment Docker atau Coolify.</p>
+
+    <section class="panel">
+      <h2>Struktur Folder</h2>
+      <p>Struktur root project disiapkan seperti berikut:</p>
+      <ul>
+        <li><code>index.html</code> sebagai landing page utama.</li>
+        <li><code>manual-book.html</code> sebagai dokumentasi singkat.</li>
+        <li><code>01</code> sampai <code>05</code> sebagai folder aplikasi WebGIS.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Daftar Aplikasi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Folder</th>
+            <th>Nama Aplikasi</th>
+            <th>Entry Point</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>01</code></td>
+            <td>Webgis SPBU Point</td>
+            <td><code>index.php</code></td>
+          </tr>
+          <tr>
+            <td><code>02</code></td>
+            <td>Webgis Jalan Parsil</td>
+            <td><code>index.php</code></td>
+          </tr>
+          <tr>
+            <td><code>03</code></td>
+            <td>Webgis Choropleth</td>
+            <td><code>choropleth.html</code></td>
+          </tr>
+          <tr>
+            <td><code>04</code></td>
+            <td>Webgis SPBU 24 Ja Upgrade</td>
+            <td><code>index.php</code></td>
+          </tr>
+          <tr>
+            <td><code>05</code></td>
+            <td>Webgis Kemiskinan</td>
+            <td><code>login.php</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Environment Database</h2>
+      <p>Setiap aplikasi PHP memakai environment variable berikut untuk koneksi database:</p>
+      <ul>
+        <li><code>DB_HOST</code></li>
+        <li><code>DB_USER</code></li>
+        <li><code>DB_PASSWORD</code></li>
+        <li><code>DB_NAME</code></li>
+      </ul>
+      <p>Jika database dipisah sebagai resource Coolify, isi <code>DB_HOST</code> dengan hostname service database, bukan <code>localhost</code>.</p>
+    </section>
+  </main>
+</body>
+</html>
