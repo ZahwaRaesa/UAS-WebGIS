@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:80"
+    environment:
+      # Koneksi database menunjuk ke container 'db'
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      # Nama-nama database (akan otomatis dibuat oleh MySQL container saat pertama kali jalan)
+      - DB_NAME=uas_06
+      - DB_NAME_04=db_24jam
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # Auto-import semua database saat container pertama kali dibuat (volume kosong)
+      - ./01/db_spbu.sql:/docker-entrypoint-initdb.d/1_db_spbu.sql
+      - ./02/database.sql:/docker-entrypoint-initdb.d/2_database.sql
+      - ./04/db_spbu.sql:/docker-entrypoint-initdb.d/4_db_spbu.sql
+      - ./05/database_uas_06.sql:/docker-entrypoint-initdb.d/5_database_uas_06.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+volumes:
+  db_data:
