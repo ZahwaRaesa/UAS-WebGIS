@@ -14,17 +14,17 @@ USE `uas_06`;
 
 
 SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS log_aktivitas;
-DROP TABLE IF EXISTS pesan;
-DROP TABLE IF EXISTS histori_bantuan;
-DROP TABLE IF EXISTS bantuan;
-DROP TABLE IF EXISTS laporan;
-DROP TABLE IF EXISTS pelatihan;
-DROP TABLE IF EXISTS penduduk;
-DROP TABLE IF EXISTS keluarga;
-DROP TABLE IF EXISTS rumah_ibadah;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS `log_aktivitas`;
+DROP TABLE IF EXISTS `pesan`;
+DROP TABLE IF EXISTS `histori_bantuan`;
+DROP TABLE IF EXISTS `bantuan`;
+DROP TABLE IF EXISTS `laporan`;
+DROP TABLE IF EXISTS `pelatihan`;
+DROP TABLE IF EXISTS `penduduk`;
+DROP TABLE IF EXISTS `keluarga`;
+DROP TABLE IF EXISTS `rumah_ibadah`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `role`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ── 1. ROLE ─────────────────────────────────────────────────
