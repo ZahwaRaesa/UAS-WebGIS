@@ -7,7 +7,7 @@ $user = getenv('DB_USER') ?: 'root';
 $pass = getenv('DB_PASSWORD') ?: '';
 $db   = getenv('DB_NAME') ?: 'uas_06';
 
-$conn = mysqli_connect($host, $user, $pass, $db);
+$conn = @mysqli_connect($host, $user, $pass, $db);
 
 if (!$conn) {
     http_response_code(500);
