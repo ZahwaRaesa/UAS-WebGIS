@@ -1,6 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `uas_06` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `uas_06`;
-
+﻿
 -- ============================================================
 -- Bawaan 05
 -- ============================================================

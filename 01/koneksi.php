@@ -1,10 +1,11 @@
 <?php
 $host = getenv('DB_HOST') ?: 'db';
-$user = getenv('DB_USER') ?: 'root';
-$pass = getenv('DB_PASSWORD') ?: 'rootpassword';
-$db   = getenv('DB_NAME') ?: 'uas_06';
+$port = getenv('DB_PORT') ?: 3306;
+$user = getenv('DB_USERNAME') ?: 'webgis_user';
+$pass = getenv('DB_PASSWORD') ?: 'webgis_password';
+$db   = getenv('DB_DATABASE') ?: 'webgis_spbu';
 
-$conn = @mysqli_connect($host, $user, $pass, $db);
+$conn = @mysqli_connect($host, $user, $pass, $db, $port);
 
 if (!$conn) {
     header('Content-Type: application/json');
