@@ -12,7 +12,7 @@ if ($aksi === 'login') {
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     if (!$email || !$password) json_out(['error'=>'Email dan password wajib diisi'],400);
-    $stmt = $conn->prepare("SELECT u.*,r.nama AS role_nama FROM user u JOIN role r ON u.role_id=r.id WHERE u.email=? AND u.aktif=1 LIMIT 1");
+    $stmt = $conn->prepare("SELECT u.*,r.nama AS role_nama FROM `user` u JOIN `role` r ON u.role_id=r.id WHERE u.email=? AND u.aktif=1 LIMIT 1");
     if (!$stmt) {
         json_out(['error' => 'Database error: ' . $conn->error], 500);
     }

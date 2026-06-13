@@ -1,4 +1,4 @@
-﻿
+
 -- ============================================================
 -- Bawaan 05
 -- ============================================================
@@ -26,19 +26,19 @@ DROP TABLE IF EXISTS `role`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ── 1. ROLE ─────────────────────────────────────────────────
-CREATE TABLE role (
+CREATE TABLE `role` (
   id       INT AUTO_INCREMENT PRIMARY KEY,
   nama     VARCHAR(50) NOT NULL,
   deskripsi TEXT
 ) ENGINE=InnoDB;
 
-INSERT INTO role (nama, deskripsi) VALUES
+INSERT INTO `role` (nama, deskripsi) VALUES
 ('masyarakat', 'Hanya dapat melihat data dan membuat laporan'),
 ('pengurus',   'Input & update data penduduk, verifikasi laporan, salurkan bantuan'),
 ('pimpinan',   'Read-only, monitoring dashboard');
 
 -- ── 2. USER ─────────────────────────────────────────────────
-CREATE TABLE user (
+CREATE TABLE `user` (
   id         INT AUTO_INCREMENT PRIMARY KEY,
   nama       VARCHAR(100) NOT NULL,
   email      VARCHAR(100) NOT NULL UNIQUE,
@@ -46,11 +46,11 @@ CREATE TABLE user (
   role_id    INT NOT NULL DEFAULT 1,
   aktif      TINYINT(1) DEFAULT 1,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (role_id) REFERENCES role(id)
+  FOREIGN KEY (role_id) REFERENCES `role`(id)
 ) ENGINE=InnoDB;
 
 -- Password untuk semua akun demo: "password"
-INSERT INTO user (nama, email, password, role_id) VALUES
+INSERT INTO `user` (nama, email, password, role_id) VALUES
 ('Admin Utama',      'admin@uas.id',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 2),
 ('Pimpinan Daerah',  'pimpinan@uas.id', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 3),
 ('Warga Biasa',      'warga@uas.id',    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1),
@@ -68,7 +68,7 @@ CREATE TABLE rumah_ibadah (
   radius     DOUBLE DEFAULT 500,
   user_id    INT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE SET NULL
+  FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 INSERT INTO rumah_ibadah (nama, jenis, kontak, alamat, lat, lng, radius, user_id) VALUES
@@ -190,7 +190,7 @@ CREATE TABLE histori_bantuan (
   created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (penduduk_id)     REFERENCES penduduk(id) ON DELETE CASCADE,
   FOREIGN KEY (bantuan_id)      REFERENCES bantuan(id) ON DELETE CASCADE,
-  FOREIGN KEY (disalurkan_oleh) REFERENCES user(id) ON DELETE SET NULL
+  FOREIGN KEY (disalurkan_oleh) REFERENCES `user`(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 INSERT INTO histori_bantuan (penduduk_id,bantuan_id,tanggal,jumlah,status,disalurkan_oleh,keterangan) VALUES
@@ -217,7 +217,7 @@ CREATE TABLE laporan (
   created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (penduduk_id)        REFERENCES penduduk(id) ON DELETE SET NULL,
-  FOREIGN KEY (diverifikasi_oleh)  REFERENCES user(id) ON DELETE SET NULL
+  FOREIGN KEY (diverifikasi_oleh)  REFERENCES `user`(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 INSERT INTO laporan (pelapor,penduduk_id,deskripsi,lat,lng,urgensi,status) VALUES
@@ -237,7 +237,7 @@ CREATE TABLE log_aktivitas (
   keterangan TEXT,
   ip_address VARCHAR(45),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE SET NULL
+  FOREIGN KEY (user_id) REFERENCES `user`(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 INSERT INTO log_aktivitas (user_id,aksi,tabel,data_id,keterangan) VALUES
@@ -254,8 +254,8 @@ CREATE TABLE pesan (
   isi        TEXT NOT NULL,
   dibaca     TINYINT(1) DEFAULT 0,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (dari_user) REFERENCES user(id) ON DELETE CASCADE,
-  FOREIGN KEY (ke_user)   REFERENCES user(id) ON DELETE SET NULL
+  FOREIGN KEY (dari_user) REFERENCES `user`(id) ON DELETE CASCADE,
+  FOREIGN KEY (ke_user)   REFERENCES `user`(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 INSERT INTO pesan (dari_user,ke_user,isi,dibaca) VALUES
@@ -299,7 +299,7 @@ CREATE TABLE jalan(
  nama_jalan VARCHAR(150),
  status VARCHAR(50),
  panjang DOUBLE,
- geom LINESTRING NOT NULL,
+ geom LINESTRING NOT NULL SRID 0,
  SPATIAL INDEX idx_jalan(geom)
 );
 
@@ -308,7 +308,7 @@ CREATE TABLE parsil(
  pemilik VARCHAR(100),
  status VARCHAR(50),
  luas DOUBLE,
- geom POLYGON NOT NULL,
+ geom POLYGON NOT NULL SRID 0,
  SPATIAL INDEX idx_parsil(geom)
 );
 
@@ -316,7 +316,7 @@ CREATE TABLE jalan_rusak(
  id INT AUTO_INCREMENT PRIMARY KEY,
  nama_titik VARCHAR(100),
  keterangan TEXT,
- geom POINT NOT NULL,
+ geom POINT NOT NULL SRID 0,
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  SPATIAL INDEX idx_rusak(geom)
 );

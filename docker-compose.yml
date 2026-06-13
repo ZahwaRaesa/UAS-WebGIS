@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     expose:
       - "80"
+    volumes:
+      - app_uploads:/var/www/html/05/uploads
     environment:
       DB_HOST: db
       DB_PORT: 3306
@@ -47,13 +49,7 @@ services:
         echo 'Waiting for database...';
         sleep 2;
       done;
-      sleep 3;
-      echo 'mysqld is alive';
-      for file in /docker-entrypoint-initdb.d/*.sql; do
-        echo \"Running $$file\";
-        mysql -h db -uroot --password=$$MYSQL_PWD < $$file || exit 1;
-      done;
-      echo 'All migrations done.';
+      echo 'Database is ready, all internal migrations done.';
       "
     restart: "no"
 
@@ -70,3 +66,4 @@ services:
 
 volumes:
   webgis_db_data:
+  app_uploads:

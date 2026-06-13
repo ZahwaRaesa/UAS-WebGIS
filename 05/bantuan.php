@@ -52,7 +52,7 @@ if ($aksi === 'histori') {
           FROM histori_bantuan hb
           JOIN bantuan b ON hb.bantuan_id=b.id
           JOIN penduduk p ON hb.penduduk_id=p.id
-          LEFT JOIN user u ON hb.disalurkan_oleh=u.id
+          LEFT JOIN `user` u ON hb.disalurkan_oleh=u.id
           WHERE $w ORDER BY hb.tanggal DESC,hb.id DESC";
     if($params){$stmt=$conn->prepare($sql);$stmt->bind_param($types,...$params);$stmt->execute();$res=$stmt->get_result();$stmt->close();}
     else $res=$conn->query($sql);

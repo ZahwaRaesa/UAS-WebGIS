@@ -11,7 +11,7 @@ if ($aksi === 'inbox') {
     if(!$uid) json_out([]);
     $sql="SELECT p.*,u.nama AS nama_pengirim
           FROM pesan p
-          JOIN user u ON p.dari_user=u.id
+          JOIN `user` u ON p.dari_user=u.id
           WHERE (p.ke_user=$uid OR p.ke_user IS NULL)
           ORDER BY p.created_at DESC LIMIT 80";
     $res=$conn->query($sql); $rows=[];
@@ -23,7 +23,7 @@ if ($aksi === 'inbox') {
 
 if ($aksi === 'history') {
     $ke=(int)($_GET['ke']??0);
-    $res=$conn->query("SELECT p.*,u.nama AS nama_pengirim FROM pesan p JOIN user u ON p.dari_user=u.id WHERE (p.dari_user=$uid AND p.ke_user=$ke) OR (p.dari_user=$ke AND p.ke_user=$uid) ORDER BY p.created_at ASC LIMIT 100");
+    $res=$conn->query("SELECT p.*,u.nama AS nama_pengirim FROM pesan p JOIN `user` u ON p.dari_user=u.id WHERE (p.dari_user=$uid AND p.ke_user=$ke) OR (p.dari_user=$ke AND p.ke_user=$uid) ORDER BY p.created_at ASC LIMIT 100");
     $rows=[]; if($res) while($r=$res->fetch_assoc()) $rows[]=$r;
     json_out($rows);
 }
@@ -39,7 +39,7 @@ if ($aksi === 'kirim') {
 }
 
 if ($aksi === 'kontak') {
-    $res=$conn->query("SELECT u.id,u.nama,r.nama AS role FROM user u JOIN role r ON u.role_id=r.id WHERE u.aktif=1".($uid?" AND u.id!=$uid":'')." ORDER BY u.nama");
+    $res=$conn->query("SELECT u.id,u.nama,r.nama AS role FROM `user` u JOIN `role` r ON u.role_id=r.id WHERE u.aktif=1".($uid?" AND u.id!=$uid":'')." ORDER BY u.nama");
     $rows=[]; if($res) while($r=$res->fetch_assoc()) $rows[]=$r;
     json_out($rows);
 }

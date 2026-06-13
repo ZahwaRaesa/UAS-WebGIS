@@ -18,7 +18,7 @@ if ($aksi === 'list') {
     $sql="SELECT l.*,p.nama AS nama_penduduk,p.status_ekonomi,p.nik,u.nama AS nama_verifikator
           FROM laporan l
           LEFT JOIN penduduk p ON l.penduduk_id=p.id
-          LEFT JOIN user u ON l.diverifikasi_oleh=u.id
+          LEFT JOIN `user` u ON l.diverifikasi_oleh=u.id
           WHERE $w
           ORDER BY FIELD(l.urgensi,'darurat','tinggi','sedang','rendah'),l.created_at DESC";
     $res=$conn->query($sql);
@@ -29,7 +29,7 @@ if ($aksi === 'list') {
 
 if ($aksi === 'detail') {
     $id=(int)($_GET['id']??0);
-    $res=$conn->query("SELECT l.*,p.nama AS nama_penduduk,u.nama AS nama_verifikator FROM laporan l LEFT JOIN penduduk p ON l.penduduk_id=p.id LEFT JOIN user u ON l.diverifikasi_oleh=u.id WHERE l.id=$id LIMIT 1");
+    $res=$conn->query("SELECT l.*,p.nama AS nama_penduduk,u.nama AS nama_verifikator FROM laporan l LEFT JOIN penduduk p ON l.penduduk_id=p.id LEFT JOIN `user` u ON l.diverifikasi_oleh=u.id WHERE l.id=$id LIMIT 1");
     json_out($res->fetch_assoc()??['error'=>'Tidak ditemukan']);
 }
 

@@ -32,7 +32,7 @@ $prioritas=[]; $res=$conn->query("SELECT p.id,p.nik,p.nama,p.status_ekonomi,TIME
 if($res) while($r=$res->fetch_assoc()) $prioritas[]=$r;
 
 // aktivitas
-$aktivitas=[]; $res=$conn->query("SELECT la.*,u.nama AS nama_user FROM log_aktivitas la LEFT JOIN user u ON la.user_id=u.id ORDER BY la.created_at DESC LIMIT 15");
+$aktivitas=[]; $res=$conn->query("SELECT la.*,u.nama AS nama_user FROM log_aktivitas la LEFT JOIN `user` u ON la.user_id=u.id ORDER BY la.created_at DESC LIMIT 15");
 if($res) while($r=$res->fetch_assoc()) $aktivitas[]=$r;
 
 json_out([
