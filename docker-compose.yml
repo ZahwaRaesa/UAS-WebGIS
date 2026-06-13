@@ -35,10 +35,7 @@ services:
     restart: unless-stopped
 
   migrate:
-    build:
-      context: .
-      dockerfile: Dockerfile.db
-    image: webgis-db
+    image: mysql:8.4
     environment:
       MYSQL_PWD: root_password
     depends_on:
